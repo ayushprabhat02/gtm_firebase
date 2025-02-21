@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- added for notification-->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
       android:name=".MainApplication"
@@ -8,6 +11,7 @@
       android:icon="@mipmap/ic_launcher"
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
+        android:usesCleartextTraffic="true"
       android:theme="@style/AppTheme"
       android:supportsRtl="true">
       <activity
@@ -20,6 +24,17 @@
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+      </activity>
+      <!--  Add preview activity. -->
+      <activity
+        android:name="com.google.android.gms.tagmanager.TagManagerPreviewActivity"
+        android:noHistory="true"> <!-- optional, removes previewActivity from activity stack. -->
+        <intent-filter>
+          <data android:scheme="tagmanager.c.com.gtm_reactnative" />
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE"/>
         </intent-filter>
       </activity>
     </application>

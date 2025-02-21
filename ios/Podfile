@@ -16,6 +16,11 @@ end
 
 target 'GTM_ReactNative' do
   config = use_native_modules!
+  use_frameworks! :linkage => :static
+  $RNFirebaseAsStaticFramework = true
+
+  # Add Google Tag Manager dependency here
+  pod 'GoogleTagManager', '~> 8.0'
 
   use_react_native!(
     :path => config[:reactNativePath],
