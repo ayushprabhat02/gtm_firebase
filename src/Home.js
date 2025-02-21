@@ -1,99 +1,69 @@
-import {StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import auth from '@react-native-firebase/auth';
+import {View, Text, Button, FlatList, StyleSheet} from 'react-native';
 
-const Home = ({navigation}) => {
-  //state
-  const [phone, setPhone] = useState();
-  const [confirm, setConfirm] = useState(null);
-  const [code, setCode] = useState('');
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
+const Home = () => {
+  const [count, setCount] = useState(0);
+  const [data, setData] = useState([]);
 
-  console.log('------user------', JSON.stringify(user));
-  console.log('------phone-----', phone);
-  //function
-  async function signInWithPhoneNumber(phoneNumber) {
-    const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-    setConfirm(confirmation);
-  }
+  // Problem 1: Fetching data from a fake API, but response handling is broken
 
-  async function confirmCode() {
-    try {
-      await confirm.confirm(code);
-    } catch (error) {
-      console.log('Invalid code.');
-      Alert.alert('Invalid code');
-    }
-  }
-
-  // Handle user state changes
-  function onAuthStateChanged(user) {
-    setUser(user);
-    if (initializing) setInitializing(false);
-  }
-
-  const logoutHandler = async () => {
-    try {
-      await auth().signOut();
-    } catch {
-      console.log('signout error');
-    } finally {
-      user(null);
-    }
+  const callApi = async () => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(json => {
+        // Error: the data isn't being handled correctly
+        setData(json);
+      })
+      .catch(error => console.error('Error fetching data:', error));
   };
-
-  // sideEffect
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
+    callApi();
   }, []);
 
-  if (initializing) return null;
+  // Problem 2: The button to increase the count doesn't work
+  const incrementCount = () => {
+    setCount(count + 1);
+  };
 
-  if (!user) {
-    if (!confirm) {
-      return (
-        <>
-          <TextInput
-            value={phone}
-            onChangeText={text => setPhone(text)}
-            style={{borderWidth: 1, margin: 20}}
-            inputMode="numeric"
-            maxLength={10}
-          />
-          <Button
-            title="Phone Number Sign In"
-            onPress={() => signInWithPhoneNumber('+91 9988776655')}
-          />
-        </>
-      );
-    }
-    return (
-      <View style={{padding: 20}}>
-        <TextInput
-          value={code}
-          onChangeText={text => setCode(text)}
-          style={{borderWidth: 1}}
-        />
-        <Button title="Confirm Code" onPress={() => confirmCode()} />
-      </View>
-    );
-  }
-
+  // Problem 3: Conditional rendering doesn't work when count > 5
   return (
     <View style={styles.container}>
-      <Text>Welcome {user?.email}</Text>
-      <Button title="Logout" onPress={logoutHandler} />
+      <Text style={styles.title}>Welc!</Text>
+      <Text>Count: {count}</Text>
+
+      {/* The button doesn't change the count due to a bug */}
+      <Button title="Increment Count" onPress={incrementCount} />
+
+      <FlatList
+        data={data}
+        renderItem={({item}) => <Text>{item.title}</Text>}
+        keyExtractor={item => item.id.toString()}
+      />
+
+      <Button title="hit" onPress={callApi} />
+
+      {/* Problem 3: The count being greater than 5 doesn't trigger this */}
+      {count > 5 && <Text style={styles.alert}>Count is more than 5!</Text>}
     </View>
   );
 };
 
-export default Home;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5fcff',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  alert: {
+    color: 'red',
+    fontSize: 18,
+    marginTop: 20,
   },
 });
+
+export default Home;
