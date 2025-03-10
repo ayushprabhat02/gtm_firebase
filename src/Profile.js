@@ -1,7 +1,8 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const Profile = () => {
+const Profile = ({route}) => {
+  console.log('route params :', route);
   return (
     <View>
       <Text>Profile</Text>
