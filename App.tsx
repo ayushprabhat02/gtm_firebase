@@ -11,7 +11,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const NAVIGATION_IDS = ['home', 'profile'];
 
 function buildDeepLinkFromNotificationData(data): string | null {
-  console.log('------data----------', data);
+  // console.log('------data----------', data);
   const navigationId = data?.navigationId;
   if (!NAVIGATION_IDS.includes(navigationId)) {
     console.warn('Unverified navigationId', navigationId);
@@ -75,6 +75,11 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   const requestNotificationPermission = async () => {
+    // Register the device with FCM
+    const deviceRegisterResponse =
+      await messaging().registerDeviceForRemoteMessages();
+    console.log('-deviceRegisterResponse--', deviceRegisterResponse);
+
     await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
     );
@@ -115,7 +120,7 @@ const App = () => {
 
     // Handle foreground notifications
     const unsubscribeMessage = messaging().onMessage(async remoteMessage => {
-      console.log('Foreground Notification:', remoteMessage);
+      console.log('Foreground Notification receive:', remoteMessage);
 
       if (remoteMessage?.notification) {
         // Show a local notification
@@ -134,9 +139,11 @@ const App = () => {
 
     // Handle user tapping on Notifee notifications
     const unsubscribeNotifee = notifee.onForegroundEvent(({type, detail}) => {
-      console.log('--detail--', detail);
       if (type === EventType.PRESS) {
-        console.log('User tapped the notification:', detail);
+        console.log(
+          'User tapped the notification in foreground:',
+          JSON.stringify(detail),
+        );
         const deepLink = buildDeepLinkFromNotificationData(
           detail?.notification?.data,
         );
