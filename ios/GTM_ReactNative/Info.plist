@@ -26,7 +26,8 @@
 		<true/>
 		<key>NSAppTransportSecurity</key>
 		<dict>
-			<key>NSAllowsArbitraryLoads</key>
+			<key>NSAll
+			owsArbitraryLoads</key>
 			<false/>
 			<key>NSAllowsLocalNetworking</key>
 			<true/>
@@ -60,5 +61,30 @@
 				</array>
 			</dict>
 		</array>
+		<!-- 🔥 CORRECT PLACE FOR ICONS CONFIG -->
+		<key>CFBundleIcons</key>
+		<dict>
+			<key>CFBundleAlternateIcons</key>
+			<dict>
+				<key>IconAlternate1</key>
+				<dict>
+					<key>CFBundleIconFiles</key>
+					<array>
+						<string>icon_alternate_1</string>
+					</array>
+					<key>UIPrerenderedIcon</key>
+					<false/>
+				</dict>
+				<key>IconAlternate2</key>
+				<dict>
+					<key>CFBundleIconFiles</key>
+					<array>
+						<string>icon_alternate_2</string>
+					</array>
+					<key>UIPrerenderedIcon</key>
+					<false/>
+				</dict>
+			</dict>
+		</dict>
 	</dict>
 </plist>
