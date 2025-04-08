@@ -7,6 +7,9 @@ import NavigationService from './src/NavigationService';
 import Profile from './src/Profile';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import installations from '@react-native-firebase/installations';
+import inAppMessaging from '@react-native-firebase/in-app-messaging';
+import analytics from '@react-native-firebase/analytics';
 
 const NAVIGATION_IDS = ['home', 'profile'];
 
@@ -74,6 +77,7 @@ const linking = {
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const [nDeviceToken, setNDeviceToken] = React.useState('');
   const requestNotificationPermission = async () => {
     // Register the device with FCM
     const deviceRegisterResponse =
@@ -92,6 +96,7 @@ const App = () => {
     if (enabled) {
       // console.log('Authorization status:', authStatus);
       const token = await messaging().getToken();
+      setNDeviceToken(token);
       console.log('---token---', token);
     }
   };
@@ -159,12 +164,32 @@ const App = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const logFID = async () => {
+      const fid = await installations().getId();
+      console.log('🔥 Firebase Installation ID (FID):', fid);
+    };
+
+    logFID();
+  }, []);
+
+  useEffect(() => {
+    // Enable data collection (usually auto-enabled)
+    inAppMessaging().setMessagesDisplaySuppressed(false);
+
+    // Optionally trigger a custom Analytics event
+    analytics().logEvent('membership_screen_opened');
+  }, []);
+
   return (
     <NavigationContainer
       ref={ref => NavigationService.setTopLevelNavigator(ref)}
       linking={linking}>
       <Stack.Navigator screenOptions={{}}>
-        <Stack.Screen name="Home" component={Home} options={{title: 'Home'}} />
+        <Stack.Screen name="Home">
+          {props => <Home {...props} nDeviceToken={nDeviceToken} />}
+        </Stack.Screen>
+        {/* <Stack.Screen name="Home" component={Home} options={{title: 'Home'}} /> */}
         <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>

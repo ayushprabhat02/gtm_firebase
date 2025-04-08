@@ -1,10 +1,16 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const Home = () => {
+const Home = ({nDeviceToken}) => {
   return (
-    <View>
-      <Text>Home</Text>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+      }}>
+      <Text>{nDeviceToken}</Text>
     </View>
   );
 };
