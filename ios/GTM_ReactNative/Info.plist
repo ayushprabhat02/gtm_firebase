@@ -60,5 +60,25 @@
 				</array>
 			</dict>
 		</array>
+		<key>CFBundleIcons</key>
+		<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+			<string>AppIcon</string>
+			</array>
+		</dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>PickachuIcon</key>
+			<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>PickachuIcon</string>
+			</array>
+			</dict>
+		</dict>
+		</dict>
 	</dict>
 </plist>

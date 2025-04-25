@@ -10,6 +10,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import installations from '@react-native-firebase/installations';
 import inAppMessaging from '@react-native-firebase/in-app-messaging';
 import analytics from '@react-native-firebase/analytics';
+import {
+  getActiveIcon,
+  setIcon,
+  getAllAlternativeIcons,
+  resetIcon,
+} from 'react-native-app-icon-changer';
 
 const NAVIGATION_IDS = ['home', 'profile'];
 
@@ -180,6 +186,12 @@ const App = () => {
     // Optionally trigger a custom Analytics event
     analytics().logEvent('membership_screen_opened');
   }, []);
+
+  setIcon('AlternativeIcon');
+
+  getAllAlternativeIcons().then(icons =>
+    console.log('Available alternative icons:', JSON.stringify(icons)),
+  );
 
   return (
     <NavigationContainer

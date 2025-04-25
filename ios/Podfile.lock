@@ -1380,6 +1380,27 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - react-native-app-icon-changer (1.1.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - react-native-safe-area-context (5.1.0):
     - DoubleConversion
     - glog
@@ -1746,11 +1767,11 @@ PODS:
     - Firebase/Auth (= 11.5.0)
     - React-Core
     - RNFBApp
-  - RNFBInAppMessaging (21.13.0):
+  - RNFBInAppMessaging (21.6.1):
     - Firebase/InAppMessaging (= 11.5.0)
     - React-Core
     - RNFBApp
-  - RNFBInstallations (21.13.0):
+  - RNFBInstallations (21.6.1):
     - Firebase/Installations (= 11.5.0)
     - React-Core
     - RNFBApp
@@ -1851,6 +1872,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-app-icon-changer (from `../node_modules/react-native-app-icon-changer`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -1986,6 +2008,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-app-icon-changer:
+    :path: "../node_modules/react-native-app-icon-changer"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-nativeconfig:
@@ -2118,6 +2142,7 @@ SPEC CHECKSUMS:
   React-logger: 697873f06b8ba436e3cddf28018ab4741e8071b6
   React-Mapbuffer: c79216258c659d70cdebaf76f8c110cc46dce8db
   React-microtasksnativemodule: 8d918db5d7c4526de2a0a4692d878a21b338c3f0
+  react-native-app-icon-changer: 6917e36056266edadc532c13f6936185cb9e8158
   react-native-safe-area-context: e0625eb857b816dff4aca46e125759cb0927e225
   React-nativeconfig: 565ebf4340d9ede95b523f0e3640f48286985ef5
   React-NativeModulesApple: ea083a4663dae82c99fe4c2186b11504ac4147e1
@@ -2151,8 +2176,8 @@ SPEC CHECKSUMS:
   RNFBAnalytics: 1eab488eb92fb35aab0ac916e00480314e995df0
   RNFBApp: a3c9c3b23aa2d77001ce62b5a997325927593c12
   RNFBAuth: 15a007eecd6ba7b9e52b45e2b41cdf6fe9f13968
-  RNFBInAppMessaging: 55ddc3419abc7a10d16385209a7fb0d1e96bcf05
-  RNFBInstallations: a03f3907ff1e7c73bd43f5662218d2a23e2006e2
+  RNFBInAppMessaging: 4d68b8684bd8aa00563cecd04d5a42470b0f48d8
+  RNFBInstallations: 808e47d2041f7010fda5c50d49b2451e3588741b
   RNFBMessaging: dd213f66f36b249f9ab035efe24dc2a3ede8f8c5
   RNNotifee: 4a6ee5c7deaf00e005050052d73ee6315dff7ec9
   RNScreens: c5be23653cbe82a7e44c7719af3465e2f152c791
